@@ -66,3 +66,36 @@ A clean-architecture-based FastAPI backend for managing events and attendees, fe
 ## Timezone Support
 All datetime inputs are stored in IST (Asia/Kolkata). When queried or created in other timezones, the system adjusts slots accordingly using pytz.
 
+## API Curls
+  
+- curl -X 'POST' \
+  'http://127.0.0.1:8000/event_management/events' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "vinjit[1:1]",
+  "location": "NYC",
+  "start_time": "2025-08-07T22:22:06.573Z",
+  "end_time": "2025-08-07T22:22:06.573Z",
+  "max_capacity": 5
+}'
+
+- curl -X 'GET' \
+  'http://127.0.0.1:8000/event_management/events' \
+  -H 'accept: application/json'
+  
+- curl -X 'POST' \
+  'http://127.0.0.1:8000/event_management/events/5/register' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "vinjit",
+  "email": "vinjit4545@gmail.com"
+}'
+
+- curl -X 'GET' \
+  'http://127.0.0.1:8000/event_management/events/5/attendees?skip=0&limit=10' \
+  -H 'accept: application/json'
+
+
+
