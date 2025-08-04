@@ -19,6 +19,7 @@ env/
 
 # Mypy
 .mypy_cache/
+*.pyc
 
 # Pyre type checker
 .pyre/

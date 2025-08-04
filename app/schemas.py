@@ -1,7 +1,9 @@
 from pydantic import BaseModel, validator
 from datetime import datetime
 import pytz
-from .config import TIMEZONE
+import os
+
+TIMEZONE = os.getenv("TIMEZONE", "Asia/Kolkata")
 
 class EventCreate(BaseModel):
     name: str
@@ -12,7 +14,11 @@ class EventCreate(BaseModel):
 
     @validator("start_time", "end_time", pre=True)
     def convert_ist(cls, v):
-        return pytz.timezone(TIMEZONE).localize(v)
+        if isinstance(v, str):
+            v = datetime.fromisoformat(v)
+        if v.tzinfo is None:
+            return pytz.timezone(TIMEZONE).localize(v)
+        return v.astimezone(pytz.timezone(TIMEZONE))
 
 class EventOut(BaseModel):
     id: int

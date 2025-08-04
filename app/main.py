@@ -10,4 +10,7 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(title="Mini Event Management System", lifespan=lifespan)
-app.include_router(router)
+app.include_router(
+    router,
+    prefix="/event_management",
+    tags=["Mini Event Management"],)
